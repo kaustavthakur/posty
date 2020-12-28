@@ -34,6 +34,7 @@
                     {{-- 28-12-2020 --}}
                     
                     <div class="flex">
+                        @auth
                         @if (!$post->likedBy(auth()->user()))
                             <form action="{{ route('posts.likes', $post) }}" method="POST" class="mr-2">
                                 @csrf
@@ -46,6 +47,14 @@
                                 <button type="submit" class="text-blue-500">Unlike</button>
                             </form>
                         @endif
+                        @if($post->ownedBy(auth()->user()))
+                        <form action="{{ route('posts.destroy', $post) }}" method="POST" class="mr-2">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500">Delete</button>
+                        </form>
+                        @endif
+                        @endauth
                         <span>{{ $post->likes->count() }} {{ Str::plural('Likes', $post->likes->count()) }} </span>
                     </div>
                     

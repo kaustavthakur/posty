@@ -9,7 +9,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(20);
+        // $posts = Post::with(['user','likes'])->orderBy('id', 'desc')->paginate(20);
+        $posts = Post::latest()->with(['user','likes'])->paginate(20);
         // $posts = DB::table('posts')->paginate(4);
         return view('posts.index', [
             'posts' => $posts,
@@ -35,8 +36,16 @@ class PostController extends Controller
         ]);
 
         //redirect
-        return back();
+        return redirect()->route('posts');
 
+    }
+
+    public function destroy(Post $post, Request $request)
+    {
+        if(!$post->ownedBy($request->user())) dd('not allowed'); // very important check
+
+        $post->delete();
+        return back();
     }
     
 }
