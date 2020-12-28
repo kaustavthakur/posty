@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(4);
+        $posts = Post::orderBy('id', 'desc')->paginate(20);
         // $posts = DB::table('posts')->paginate(4);
         return view('posts.index', [
             'posts' => $posts,
@@ -38,4 +38,5 @@ class PostController extends Controller
         return back();
 
     }
+    
 }

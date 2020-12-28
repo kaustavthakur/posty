@@ -19,4 +19,15 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+    // 28-12-2020
+    public function likes()
+    {
+        return $this->hasMany(PostLike::class);
+    }
+
+    public function likedBy(User $user)
+    {
+        return $this->likes->contains('user_id', $user->id);
+    }
+    // end 28-12-2020
 }

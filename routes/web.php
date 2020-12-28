@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostLikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,12 @@ Route::post('/posts', [PostController::class, 'store']);
 Route::get('/messages', function () {
     return view('messages');
 });
+
+//28-12-2020
+Route::post('/posts/{post}/likes', [PostLikeController::class, 'store'])->name('posts.likes');
+Route::delete('/posts/{post}/likes', [PostLikeController::class, 'destroy'])->name('posts.likes');
+// end 28-12-2020
+
 
 
 
