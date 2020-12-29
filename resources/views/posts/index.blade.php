@@ -28,39 +28,7 @@
     <div class="w-6/12 p-6 bg-white rounded-lg">
         @if ($posts->count())
             @foreach ($posts as $post)
-                <div class="mb-2">
-                    <a href="" class="font-bold">{{ $post->user->name }}</a> <span class="text-sm text-gray-600">{{ $post->created_at->diffForHumans() }}</span>
-                    <p class="mb-2">{{ $post->body }}</p>
-                    {{-- 28-12-2020 --}}
-                    
-                    <div class="flex">
-                        @auth
-                        @if (!$post->likedBy(auth()->user()))
-                            <form action="{{ route('posts.likes', $post) }}" method="POST" class="mr-2">
-                                @csrf
-                                <button type="submit" class="text-blue-500">Like</button>
-                            </form>
-                        @else
-                            <form action="{{ route('posts.likes', $post) }}" method="POST" class="mr-2">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-blue-500">Unlike</button>
-                            </form>
-                        @endif
-                        @if($post->ownedBy(auth()->user()))
-                        <form action="{{ route('posts.destroy', $post) }}" method="POST" class="mr-2">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-500">Delete</button>
-                        </form>
-                        @endif
-                        @endauth
-                        <span>{{ $post->likes->count() }} {{ Str::plural('Likes', $post->likes->count()) }} </span>
-                    </div>
-                    
-
-                    {{-- End 28-12-2020 --}}
-                </div>
+                <x-post :post="$post" />
             @endforeach
             {{ $posts->links() }}
         @else

@@ -30,9 +30,11 @@ class Post extends Model
         return $this->likes->contains('user_id', $user->id);
     }
 
-    public function ownedBy(User $user)
-    {
-        return $this->user_id === $user->id;
-    }
+    // public function ownedBy(User $user)
+    // {
+    //     return $this->user_id === $user->id;
+    // } not needed after introducing PostPolicy
+
+
     // end 28-12-2020
 }

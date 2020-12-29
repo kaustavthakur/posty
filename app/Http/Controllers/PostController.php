@@ -42,7 +42,9 @@ class PostController extends Controller
 
     public function destroy(Post $post, Request $request)
     {
-        if(!$post->ownedBy($request->user())) dd('not allowed'); // very important check
+        // if(!$post->ownedBy($request->user())) dd('not allowed'); 
+        // very important check, now done by PostPolicy & AuthServiceProvider as below
+        $this->authorize('delete', $post); //if unauthorised will throw a 403 error
 
         $post->delete();
         return back();

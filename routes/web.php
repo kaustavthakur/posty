@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
+use App\Http\Controllers\UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,9 +51,9 @@ Route::get('/messages', function () {
 
 //28-12-2020
 Route::post('/posts/{post}/likes', [PostLikeController::class, 'store'])->name('posts.likes')->middleware('auth');
-Route::delete('/posts/{post}/likes', [PostLikeController::class, 'destroy'])->name('posts.likes')->middleware('auth');
+Route::delete('/posts/{post}/unlike', [PostLikeController::class, 'destroy'])->name('posts.unlike')->middleware('auth');
 // end 28-12-2020
-
+Route::get('users/{user:username}', [UserProfileController::class, 'index'])->name('user.profile');
 
 
 
