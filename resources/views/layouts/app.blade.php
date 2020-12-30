@@ -19,7 +19,7 @@
         </ul>
         <ul class="flex items-center">
             @auth
-                <li><a class="p-3" href="">{{ auth()->user()->name }}</a></li>
+                <li><a class="p-3" href="{{ route('user.profile', auth()->user()) }}">{{ auth()->user()->name }}</a></li>
                 <li><a class="p-3" href="{{route('logout')}}">Logout</a></li>
             @endauth
 

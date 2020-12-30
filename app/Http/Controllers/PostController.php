@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    // public function __construct() {
+    //     $this->middleware('auth')->only(['store', 'destroy']);
+    // }
     public function index()
     {
         // $posts = Post::with(['user','likes'])->orderBy('id', 'desc')->paginate(20);
@@ -48,6 +51,13 @@ class PostController extends Controller
 
         $post->delete();
         return back();
+    }
+
+    public function show(Post $post)
+    {
+        return view('posts.show', [
+            'post' => $post,
+        ]);
     }
     
 }

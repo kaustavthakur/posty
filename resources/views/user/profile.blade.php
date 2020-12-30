@@ -6,8 +6,8 @@
     
     <div class="w-6/12">
         <div class="p-6">
-        <h1 class="text-2xl font-bold">{{ $user->name }}</h1>
-        <p class="text-md">Has {{ $posts->count() }} posts and {{ $user->receivedLikes->count() }} likes</p>
+        <h1 class="text-2xl font-medium mb-1">{{ $user->name }}</h1>
+        <p>Has {{ $posts->count() }} posts and {{ $user->receivedLikes->count() }} likes</p>
         </div>
         <div class="p-6 bg-white rounded-lg">
             @if ($posts->count())

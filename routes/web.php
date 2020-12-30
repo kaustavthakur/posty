@@ -42,8 +42,9 @@ Route::get('/logout', [LogoutController::class, 'logout'])->name('logout')->midd
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts');
-Route::post('/posts', [PostController::class, 'store']);
-Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::post('/posts', [PostController::class, 'store'])->middleware('auth');
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy')->middleware('auth');
 
 Route::get('/messages', function () {
     return view('messages');

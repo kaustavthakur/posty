@@ -11,7 +11,7 @@ class UserProfileController extends Controller
     //
     public function index(Request $request, User $user)
     {
-         $posts = $user->posts()->latest()->with(['user','likes'])->paginate(20);
+         $posts = $user->posts()->latest()->with(['user','likes'])->paginate(5);
          return view('user.profile', [
             'posts' => $posts,
             'user' => $user
